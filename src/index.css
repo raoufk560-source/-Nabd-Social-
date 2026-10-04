@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-display: 'Cairo', sans-serif;
+    --font-sans: 'Tajawal', 'Cairo', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Light Mode Tokens */
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #F1F5F9;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --border-color: #E2E8F0;
+  }
+
+  .dark {
+    /* Dark Premium – نبض المجالس */
+    --bg-primary: #08080F;
+    --bg-secondary: #12121D;
+    --bg-tertiary: #1A1A28;
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --accent-purple: #7C3AED;
+    --accent-purple-soft: rgba(124, 58, 237, 0.15);
+  }
+
+  html,
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    direction: rtl;
+    min-height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Ensure all scrollable regions work smoothly on iOS & Android touch screens */
+  .overflow-y-auto,
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: 1.4;
+  }
+}
+
+.font-display {
+  font-family: 'Cairo', sans-serif;
+}
+
+.font-mono-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hide scrollbars utility where needed */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom sleek scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.35);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.55);
+}
+
+/* Premium dark utilities */
+.bg-nabd { background-color: #08080F; }
+.bg-nabd-card { background-color: #12121D; }
+.bg-nabd-elevated { background-color: #1A1A28; }
+.text-nabd-purple { color: #7C3AED; }
+.bg-nabd-purple { background-color: #7C3AED; }
+.bg-nabd-purple-soft { background-color: rgba(124, 58, 237, 0.15); }
+.border-nabd { border-color: rgba(255, 255, 255, 0.08); }
+.ring-mention {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.45);
+  background: rgba(59, 130, 246, 0.08);
+}
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Mention highlight for the mentioned user only */
+.msg-mention-me {
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.12), transparent);
+  border-right: 3px solid #3B82F6;
+}
+
+/* Soft deleted message */
+.msg-deleted {
+  opacity: 0.55;
+  font-style: italic;
+}
+
+/* Safe area for mobile keyboards */
+.safe-bottom {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+
+/* إصلاح كتابة الرسائل عموديًا على الموبايل */
+.chat-msg-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 100%;
+}
+.chat-msg-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+}
+.chat-msg-text {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  word-wrap: break-word;
+  line-height: 1.5;
+  unicode-bidi: plaintext;
+}
+.chat-msg-actions {
+  flex: 0 0 auto;
+  max-width: 42%;
+}
+@media (max-width: 640px) {
+  .chat-msg-row {
+    flex-wrap: wrap;
+  }
+  .chat-msg-main {
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .chat-msg-actions {
+    width: 100%;
+    max-width: 100%;
+    flex-direction: row !important;
+    justify-content: flex-end;
+    margin-top: 0.25rem;
+  }
+  .chat-msg-text {
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+}
