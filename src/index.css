@@ -1,0 +1,400 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-display: 'Cairo', sans-serif;
+    --font-sans: 'Tajawal', 'Cairo', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Light Mode Tokens */
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #F1F5F9;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --border-color: #E2E8F0;
+  }
+
+  .dark {
+    /* Dark Premium – نبض المجالس */
+    --bg-primary: #08080F;
+    --bg-secondary: #12121D;
+    --bg-tertiary: #1A1A28;
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --accent-purple: #7C3AED;
+    --accent-purple-soft: rgba(124, 58, 237, 0.15);
+  }
+
+  html,
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    direction: rtl;
+    min-height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Ensure all scrollable regions work smoothly on iOS & Android touch screens */
+  .overflow-y-auto,
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: 1.4;
+  }
+}
+
+.font-display {
+  font-family: 'Cairo', sans-serif;
+}
+
+.font-mono-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hide scrollbars utility where needed */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom sleek scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.35);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.55);
+}
+
+/* Premium dark utilities */
+.bg-nabd { background-color: #08080F; }
+.bg-nabd-card { background-color: #12121D; }
+.bg-nabd-elevated { background-color: #1A1A28; }
+.text-nabd-purple { color: #7C3AED; }
+.bg-nabd-purple { background-color: #7C3AED; }
+.bg-nabd-purple-soft { background-color: rgba(124, 58, 237, 0.15); }
+.border-nabd { border-color: rgba(255, 255, 255, 0.08); }
+.ring-mention {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.45);
+  background: rgba(59, 130, 246, 0.08);
+}
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Mention highlight for the mentioned user only */
+.msg-mention-me {
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.12), transparent);
+  border-right: 3px solid #3B82F6;
+}
+
+/* Soft deleted message */
+.msg-deleted {
+  opacity: 0.55;
+  font-style: italic;
+}
+
+/* Safe area for mobile keyboards */
+.safe-bottom {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+
+/* إصلاح كتابة الرسائل عموديًا على الموبايل */
+.chat-msg-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 100%;
+}
+.chat-msg-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+}
+.chat-msg-text {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  word-wrap: break-word;
+  line-height: 1.5;
+  unicode-bidi: plaintext;
+}
+.chat-msg-actions {
+  flex: 0 0 auto;
+  max-width: 42%;
+}
+@media (max-width: 640px) {
+  .chat-msg-row {
+    flex-wrap: wrap;
+  }
+  .chat-msg-main {
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .chat-msg-actions {
+    width: 100%;
+    max-width: 100%;
+    flex-direction: row !important;
+    justify-content: flex-end;
+    margin-top: 0.25rem;
+  }
+  .chat-msg-text {
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   نظام التصميم الجديد — نبض المجالس v2
+   لوحة ألوان متناسقة + حركات + خلفيات حية
+   ═══════════════════════════════════════════════════════════ */
+
+/* تحسين الاختيار والتركيز */
+::selection {
+  background: rgba(139, 92, 246, 0.35);
+  color: #fff;
+}
+
+/* ── لوحة الألوان الأساسية (ثابتة عبر الموقع) ── */
+:root {
+  --nabd-violet: #8B5CF6;
+  --nabd-indigo: #6366F1;
+  --nabd-fuchsia: #D946EF;
+  --nabd-amber: #FBBF24;
+  --nabd-rose: #FB7185;
+  --nabd-emerald: #34D399;
+  --nabd-cyan: #22D3EE;
+}
+
+/* ── حركات أساسية ── */
+@keyframes nabd-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-16px); }
+}
+
+@keyframes nabd-fade-up {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes nabd-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes nabd-gradient-pan {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes nabd-glow {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.08); }
+}
+
+@keyframes nabd-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes nabd-pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+  70% { box-shadow: 0 0 0 9px rgba(52, 211, 153, 0); }
+}
+
+@keyframes nabd-spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes nabd-border-run {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* ── أدوات الحركة الجاهزة ── */
+.animate-nabd-float { animation: nabd-float 7s ease-in-out infinite; }
+.animate-nabd-float-slow { animation: nabd-float 10s ease-in-out infinite; }
+.animate-nabd-fade-up { animation: nabd-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-nabd-fade-in { animation: nabd-fade-in 0.9s ease both; }
+.animate-nabd-glow { animation: nabd-glow 5s ease-in-out infinite; }
+.animate-nabd-spin-slow { animation: nabd-spin-slow 22s linear infinite; }
+
+/* تأخير متدرج لدخول العناصر */
+.stagger-1 { animation-delay: 0.08s; }
+.stagger-2 { animation-delay: 0.16s; }
+.stagger-3 { animation-delay: 0.24s; }
+.stagger-4 { animation-delay: 0.32s; }
+.stagger-5 { animation-delay: 0.40s; }
+.stagger-6 { animation-delay: 0.48s; }
+
+/* ── نص متدرج الألوان ── */
+.text-gradient {
+  background: linear-gradient(120deg, #A78BFA, #818CF8, #E879F9, #FBBF24);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: nabd-gradient-pan 6s ease infinite;
+}
+
+.text-gradient-soft {
+  background: linear-gradient(120deg, #C4B5FD, #A5B4FC);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── خلفية الشفق المتحركة ── */
+.bg-aurora {
+  background:
+    radial-gradient(ellipse 60% 45% at 15% 20%, rgba(99, 102, 241, 0.22), transparent 60%),
+    radial-gradient(ellipse 55% 40% at 85% 15%, rgba(217, 70, 239, 0.16), transparent 60%),
+    radial-gradient(ellipse 50% 45% at 50% 90%, rgba(34, 211, 238, 0.12), transparent 60%),
+    radial-gradient(ellipse 40% 35% at 80% 75%, rgba(251, 191, 36, 0.08), transparent 60%);
+}
+
+.animate-aurora {
+  background-size: 200% 200%;
+  animation: nabd-gradient-pan 14s ease infinite;
+}
+
+/* شبكة خفيفة فوق الخلفية */
+.bg-grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 30%, transparent 75%);
+}
+
+/* ── بطاقات زجاجية فاخرة ── */
+.glass-card {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.glass-card-hover {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease;
+}
+.glass-card-hover:hover {
+  transform: translateY(-5px);
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: 0 18px 45px -18px rgba(99, 102, 241, 0.45);
+}
+
+/* ── زر رئيسي متدرج مع توهج ── */
+.btn-hero {
+  background: linear-gradient(120deg, #6366F1, #8B5CF6, #D946EF);
+  background-size: 200% auto;
+  transition: background-position 0.45s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.6);
+}
+.btn-hero:hover {
+  background-position: left center;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px -12px rgba(217, 70, 239, 0.65);
+}
+.btn-hero:active { transform: translateY(0); }
+
+/* ── شارة حيّة نابضة ── */
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #34D399;
+  animation: nabd-pulse-dot 1.8s ease-out infinite;
+}
+
+/* ── حدود متدرجة متحركة للبطاقات المميزة ── */
+.border-gradient-animated {
+  position: relative;
+}
+.border-gradient-animated::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, rgba(99,102,241,0.7), rgba(217,70,239,0.7), rgba(251,191,36,0.6), rgba(99,102,241,0.7));
+  background-size: 300% 300%;
+  animation: nabd-border-run 5s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── لمعة تمر على العناصر ── */
+.shimmer-overlay {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.09) 50%, transparent 60%);
+  background-size: 200% 100%;
+  animation: nabd-shimmer 3.5s ease infinite;
+  pointer-events: none;
+}
+
+/* ── تحسينات عامة للأزرار والحقول (سلاسة بدون تغيير الشكل) ── */
+button { transition-property: color, background-color, border-color, transform, box-shadow, opacity; }
+input, select, textarea { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+input:focus, select:focus, textarea:focus {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+}
+
+/* ── تحسينات الموبايل: أهداف لمس أكبر وأكثر راحة ── */
+@media (max-width: 640px) {
+  button { min-height: 40px; }
+  .chat-msg-actions button { min-height: 32px; }
+  .glass-card-hover:hover { transform: none; }
+}
+
+/* احترام تقليل الحركة لمن يفضّل ذلك */
+@media (prefers-reduced-motion: reduce) {
+  .animate-nabd-float, .animate-nabd-float-slow, .animate-aurora,
+  .text-gradient, .border-gradient-animated::before, .shimmer-overlay::after,
+  .animate-nabd-glow, .animate-nabd-spin-slow {
+    animation: none !important;
+  }
+}
